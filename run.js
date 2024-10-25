@@ -6,9 +6,13 @@ import chalk from 'chalk';
 function write(text){
     process.stdout.write(text);
 }
+let date = new Date();
+let time = date.toTimeString().substring(0,8);
+write(time);
 
-write('Hello world');
-
-setTimeout(()=> {
-    write(ESC + '[5D' + 'KMS23');
-}, 5000);
+setInterval(()=> {
+    write(ESC + '[8D');
+    let date = new Date();
+    let time = date.toTimeString().substring(0,8);
+    write(time);
+}, 1000);
