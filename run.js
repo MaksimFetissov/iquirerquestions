@@ -1,11 +1,25 @@
 const ESC = '\x1B';
-const reset = ESC+'[0m';
+const reset = ESC + '[0m';
 import chalk from 'chalk';
 
-import select from './select.js';
+import inquirer from 'inquirer';
 
-select([1, 2, 3, 4, 5, 6], answer => {
-    console.log('answer:' + answer);
-    process.exit();
-});
-    
+inquirer
+    .prompt([
+        {
+            type:'list',
+            message: 'Favorite fruit?',
+            name:'fruit',
+            choices: ['Apple', 'Cherry', 'Mango', 'Pear'],
+        }
+    ])
+    .then((answers) => {
+        console.log(answers);
+    })
+    .catch((error) => {
+        if (error.isTtyError) {
+            // Prompt couldn't be rendered in the current environment
+        } else {
+            // Something else went wrong
+        }
+    });
